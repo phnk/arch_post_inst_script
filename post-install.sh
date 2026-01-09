@@ -16,8 +16,31 @@ sudo pacman -Syu -noconfirm \
     gnome-shell-extensions \
     gnome-shell-extension-appindicator
 
+# drivers
+# prereqs
+sudo pacman -Syu -noconfirm \
+    patchelf \
+    go \
+
+# somehow have yay installed
+# yay -Sy nvidia-580xx-utils
+# yay -Sy nvidia-580xx-settings
+# yay -Sy nvidia-580xx-dkms
+# yay -Sy opencl-nvidia-580xx
+
 # install other reasonable things we need
-sudo pacman -Syu -noconfirm firefox wget
+sudo pacman -Syu -noconfirm \
+    firefox \
+    wget \
+    discord \
+    spotify-launcher \
+    less
+
+# fix spotify config
+sudo tee /etc/spotify-launcher.conf > /dev/null << 'EOF'
+[spotify]
+extra_arguments = ["--ozone-platform=x11"]
+EOF
 
 # install my development requirements (https://github.com/phnk/dotfiles)
 sudo pacman -Syu -noconfirm \
