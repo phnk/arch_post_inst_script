@@ -16,35 +16,47 @@ sudo pacman -Syu -noconfirm \
     gnome-shell-extensions \
     gnome-shell-extension-appindicator
 
-# drivers
-# prereqs
-sudo pacman -Syu -noconfirm \
+sudo pacman -Syu --noconfirm \
     patchelf \
     go \
     linux-headers \
     dkms \
     git \
-    base-devel
+    base-devel \
+    pulseaudio
 
-# somehow have yay installed
-# yay -Sy nvidia-580xx-utils
-# yay -Sy nvidia-580xx-settings
-# yay -Sy nvidia-580xx-dkms
-# yay -Sy opencl-nvidia-580xx
+# install yay
+(
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -sic --noconfirm
+)
+
+# drivers (nvidia 1070)
+yay -Sy --noconfirm nvidia-580xx-utils
+yay -Sy --noconfirm nvidia-580xx-settings
+yay -Sy --noconfirm nvidia-580xx-dkms
+yay -Sy --noconfirm opencl-nvidia-580xx
 
 # install other reasonable things we need
-sudo pacman -Syu -noconfirm \
+sudo pacman -Syu --noconfirm \
     firefox \
     wget \
     discord \
     spotify-launcher \
-    less
+    less \
+    telegram-desktop \
+    keepassxc \
+    udisks2
 
 # fix spotify config
 sudo tee /etc/spotify-launcher.conf > /dev/null << 'EOF'
 [spotify]
 extra_arguments = ["--ozone-platform=x11"]
 EOF
+
+# fix pulseaudio so it doesn't require change audio device to hear sound after a while
+sudo sed -i 's/^load-module module-suspend-on-idle/#load-module module-suspend-on-idle/' /etc/pulse/default.pa
 
 # install my development requirements (https://github.com/phnk/dotfiles)
 sudo pacman -Syu -noconfirm \
@@ -55,6 +67,7 @@ sudo pacman -Syu -noconfirm \
     npm \
     xclip \
     ripgrep \
+    bear 
 
 curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim" \
   --create-dirs \
