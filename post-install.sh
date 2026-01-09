@@ -21,6 +21,10 @@ sudo pacman -Syu -noconfirm \
 sudo pacman -Syu -noconfirm \
     patchelf \
     go \
+    linux-headers \
+    dkms \
+    git \
+    base-devel
 
 # somehow have yay installed
 # yay -Sy nvidia-580xx-utils
@@ -44,7 +48,6 @@ EOF
 
 # install my development requirements (https://github.com/phnk/dotfiles)
 sudo pacman -Syu -noconfirm \
-    git \
     tmux \
     zsh \
     neovim \
