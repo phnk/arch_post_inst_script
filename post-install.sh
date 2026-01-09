@@ -14,7 +14,8 @@ sudo pacman -Syu -noconfirm \
     gnome-tweaks \
     gnome-shell \
     gnome-shell-extensions \
-    gnome-shell-extension-appindicator
+    gnome-shell-extension-appindicator \
+    gnome-browser-connector
 
 sudo pacman -Syu --noconfirm \
     patchelf \
@@ -23,7 +24,8 @@ sudo pacman -Syu --noconfirm \
     dkms \
     git \
     base-devel \
-    pulseaudio
+    pulseaudio \
+    fastfetch
 
 # install yay
 (
@@ -82,5 +84,3 @@ bash "$HOME/miniconda3/miniconda.sh" -b -u -p "$HOME/miniconda3"
 rm "$HOME/miniconda3/miniconda.sh"
 source "$HOME/miniconda3/bin/activate"
 conda init zsh
-
-
