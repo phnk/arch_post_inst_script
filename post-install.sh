@@ -25,7 +25,10 @@ sudo pacman -Syu --noconfirm \
     git \
     base-devel \
     pulseaudio \
-    fastfetch
+    fastfetch \
+    qt6-tools \
+    htop \
+    kitty
 
 # install yay
 (
